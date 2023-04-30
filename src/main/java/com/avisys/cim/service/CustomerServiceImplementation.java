@@ -81,7 +81,7 @@ public class CustomerServiceImplementation implements CustomerService{
 		{
 			existingMobileNumbersList.addAll(existingCustomer.getMobileNumbers()); //List of objects
 		}
-				
+		//check new mobile numbers with existing mobile numbers in database		
 		for(String newNumber : newCustomerMobileNumberList)
 		{
 			for(MobileNumber existingNumber : existingMobileNumbersList)
