@@ -47,4 +47,20 @@ public class CustomerServiceImplementation implements CustomerService{
 		Customer customer = CustomerDao.findById(id).orElseThrow(()-> new ResourceNotFoundException("Customer not found"));
 		return customer;
 	}
+	
+	//Method to save the new customer in h2 database.
+	@Override
+	public boolean addNewCustomer(Customer customer) {
+		//check whether the customer already exists. Check on the basis of duplicate mobile number.
+		Customer existingCustomer = CustomerDao.findByMobileNumber(customer.getMobileNumber());
+		if(existingCustomer != null)
+		{
+			return false;
+		}
+		else
+		{
+			CustomerDao.save(customer);
+			return true;
+		}
+	}
 }
