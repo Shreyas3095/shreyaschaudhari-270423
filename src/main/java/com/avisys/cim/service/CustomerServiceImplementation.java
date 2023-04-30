@@ -105,4 +105,28 @@ public class CustomerServiceImplementation implements CustomerService{
 		CustomerDao.save(newCustomer);
 		return true;
 	}
+
+	@Override
+	public boolean deleteCustomer(String mobileNumber) {
+		List<CustomerDTO> customerDto =  getCustomers(null, null, mobileNumber);
+		if(customerDto != null)
+		{
+			Customer newCustomer = new Customer(customerDto.get(0).getFirstName(), customerDto.get(0).getLastName());
+			List<MobileNumber> newMobileNumbers = new ArrayList<>();
+			//Set each new mobile number to the same customer object
+			for(String mobilenumber : customerDto.get(0).getMobileNumbers())
+			{
+				newMobileNumbers.add(new MobileNumber(mobilenumber, newCustomer));
+			}
+			//set new mobile numbers to the created customer object
+			newCustomer.setMobileNumbers(newMobileNumbers);
+			CustomerDao.delete(newCustomer);
+			return true;
+		}
+		else
+		{			
+			return false;
+		}
+		
+	}
 }

@@ -13,4 +13,6 @@ public interface CustomerService {
 	
 	public boolean addNewCustomer(CustomerDTO customerDto);
 
+	public boolean deleteCustomer(String mobileNumber);
+
 }
