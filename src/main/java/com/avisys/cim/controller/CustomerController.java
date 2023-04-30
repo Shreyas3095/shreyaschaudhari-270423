@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.avisys.cim.Customer;
+import com.avisys.cim.beans.Customer;
+import com.avisys.cim.beans.CustomerDTO;
 import com.avisys.cim.service.CustomerService;
 
 @RestController
@@ -24,11 +25,11 @@ public class CustomerController {
 	
 	//End-point to fetch data using Get method or any parameter matching to relevant data.
 	@GetMapping("/getcustomer")
-	public ResponseEntity<List<Customer>> getCustomers(@RequestParam(required = false) String firstName,
+	public ResponseEntity<List<CustomerDTO>> getCustomers(@RequestParam(required = false) String firstName,
 														@RequestParam(required = false) String lastName,
 														@RequestParam(required = false) String mobileNumber)
 	{
-		List<Customer> CustomerList = customerService.getCustomers(firstName, lastName, mobileNumber); 
+		List<CustomerDTO> CustomerList = customerService.getCustomers(firstName, lastName, mobileNumber); 
 		if(CustomerList != null)
 		{
 			return ResponseEntity.status(HttpStatus.OK).body(CustomerList);
@@ -41,21 +42,22 @@ public class CustomerController {
 	
 	//End-point to fetch data using customer id using get method and path variable.
 	@GetMapping("/getcustomer/{id}")
-	public ResponseEntity<Customer> findById(@PathVariable Long id)
+	public ResponseEntity<CustomerDTO> findById(@PathVariable Long id)
 	{
-		Customer customer = customerService.findById(id);
-		if(customer == null)
+		CustomerDTO customerDto = customerService.findById(id);
+		if(customerDto == null)
 		{
 			return new ResponseEntity("Customer not found",HttpStatus.NOT_FOUND);
 		}
-		return ResponseEntity.status(HttpStatus.OK).body(customer);
+		return ResponseEntity.status(HttpStatus.OK).body(customerDto);
 	}
 	
 	//End-point to create a new customer using post method
 	@PostMapping("/addnewcustomer")
-	public ResponseEntity<Customer> addNewCustomer(@RequestBody Customer customer)
+	public ResponseEntity addNewCustomer(@RequestBody CustomerDTO customerDto)
 	{
-		boolean status = customerService.addNewCustomer(customer);
+		
+		boolean status = customerService.addNewCustomer(customerDto);
 		if(status == false)
 		{
 			return new ResponseEntity("Unable to create Customer. Mobile number already present.",HttpStatus.INTERNAL_SERVER_ERROR);

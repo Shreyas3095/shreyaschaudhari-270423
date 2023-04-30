@@ -2,14 +2,15 @@ package com.avisys.cim.service;
 
 import java.util.List;
 
-import com.avisys.cim.Customer;
+import com.avisys.cim.beans.Customer;
+import com.avisys.cim.beans.CustomerDTO;
 
 public interface CustomerService {
 
-	public List<Customer> getCustomers(String firstName, String lastName, String mobileNumber);
+	public List<CustomerDTO> getCustomers(String firstName, String lastName, String mobileNumber);
 
-	public Customer findById(Long id);
+	public CustomerDTO findById(Long id);
 	
-	public boolean addNewCustomer(Customer customer);
+	public boolean addNewCustomer(CustomerDTO customerDto);
 
 }
