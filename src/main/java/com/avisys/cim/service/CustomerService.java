@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.avisys.cim.beans.Customer;
 import com.avisys.cim.beans.CustomerDTO;
+import com.avisys.cim.beans.MobileNumber;
 
 public interface CustomerService {
 
@@ -14,5 +15,9 @@ public interface CustomerService {
 	public boolean addNewCustomer(CustomerDTO customerDto);
 
 	public boolean deleteCustomer(String mobileNumber);
+
+	public boolean deleteCustomerMobileNumber(MobileNumber oldNumber, Long id);
+
+	public boolean addCustomerMobileNumber(MobileNumber newNumber, Long id);
 
 }

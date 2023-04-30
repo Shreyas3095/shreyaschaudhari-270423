@@ -129,4 +129,64 @@ public class CustomerServiceImplementation implements CustomerService{
 		}
 		
 	}
+
+	@Override
+	public boolean deleteCustomerMobileNumber(MobileNumber oldNumber, Long id) {
+		CustomerDTO customerDto = findById(id);
+		if(customerDto != null)
+		{
+			//convert customerDTO into customer object
+			Customer newCustomer = new Customer(customerDto.getFirstName(), customerDto.getLastName());
+			List<MobileNumber> newMobileNumbers = new ArrayList<>();
+			for(String mobilenumber : customerDto.getMobileNumbers())
+			{
+				newMobileNumbers.add(new MobileNumber(mobilenumber, newCustomer));
+			}
+			newCustomer.setMobileNumbers(newMobileNumbers);
+			
+			//Retrieve old existing number from matched customer
+			MobileNumber oldMobileNumber = newCustomer.getMobileNumbers()
+					.stream()
+					.filter(mobileNumber -> mobileNumber.getMobileNumber().equals(oldNumber))
+					.findFirst().orElseThrow(()-> new ResourceNotFoundException("Mobile Number not found"));
+			if(oldMobileNumber != null)
+			{
+				//Remove the old number
+				newCustomer.removeMobileNumber(oldMobileNumber);
+				return true;
+			}
+			
+		}
+		return false;
+	}
+
+	@Override
+	public boolean addCustomerMobileNumber(MobileNumber newNumber, Long id) {
+		CustomerDTO customerDto = findById(id);
+		if(customerDto != null)
+		{
+			//convert customerDTO into customer object
+			Customer newCustomer = new Customer(customerDto.getFirstName(), customerDto.getLastName());
+			List<MobileNumber> newMobileNumbers = new ArrayList<>();
+			for(String mobilenumber : customerDto.getMobileNumbers())
+			{
+				newMobileNumbers.add(new MobileNumber(mobilenumber, newCustomer));
+			}
+			newCustomer.setMobileNumbers(newMobileNumbers);
+			
+			//Retrieve old existing number from matched customer
+			MobileNumber newMobileNumber = newCustomer.getMobileNumbers()
+					.stream()
+					.filter(mobileNumber -> mobileNumber.getMobileNumber().equals(newNumber))
+					.findFirst().orElseThrow(()-> new ResourceNotFoundException("Mobile Number not found"));
+			if(newMobileNumber != null)
+			{
+				//Remove the old number
+				newCustomer.addMobileNumber(newMobileNumber);
+				return true;
+			}
+			
+		}
+		return false;
+	}
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import org.springframework.web.service.annotation.DeleteExchange;
 
 import com.avisys.cim.beans.Customer;
 import com.avisys.cim.beans.CustomerDTO;
+import com.avisys.cim.beans.MobileNumber;
 import com.avisys.cim.service.CustomerService;
 
 @RestController
@@ -81,6 +83,34 @@ public class CustomerController {
 		else
 		{
 			return new ResponseEntity("Customer deleted successfully", HttpStatus.OK);
+		}
+	}
+	
+	@PutMapping("/deletemobilenumber/{id}")
+	public ResponseEntity deleteCustomerMobileNumber(@RequestBody MobileNumber oldNumber, @PathVariable Long id)
+	{
+		boolean status = customerService.deleteCustomerMobileNumber(oldNumber, id);
+		if(status == false)
+		{
+			return new ResponseEntity("Unable to update Customer mobile number.",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		else
+		{
+			return new ResponseEntity("Customer mobile number updated successfully", HttpStatus.OK);
+		}
+	}
+	
+	@PutMapping("/addmobilenumber/{id}")
+	public ResponseEntity addCustomerMobileNumber(@RequestBody MobileNumber newNumber, @PathVariable Long id)
+	{
+		boolean status = customerService.addCustomerMobileNumber(newNumber, id);
+		if(status == false)
+		{
+			return new ResponseEntity("Unable to update Customer mobile number.",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		else
+		{
+			return new ResponseEntity("Customer mobile number updated successfully", HttpStatus.OK);
 		}
 	}
 }

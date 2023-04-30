@@ -78,4 +78,16 @@ public class Customer {
 	public void setMobileNumbers(List<MobileNumber> mobileNumbers) {
 		this.mobileNumbers = mobileNumbers;
 	}
+	
+	//Method to add mobile number to existing customer
+	public void addMobileNumber(MobileNumber mobileNumber) {
+        this.mobileNumbers.add(mobileNumber);
+        mobileNumber.setCustomer(this);
+    }
+	
+	//Method to remove mobile number from existing customer
+    public void removeMobileNumber(MobileNumber mobileNumber) {
+        this.mobileNumbers.remove(mobileNumber);
+        mobileNumber.setCustomer(null);
+    }
 }
