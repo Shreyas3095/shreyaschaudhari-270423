@@ -1,0 +1,255 @@
+{
+	"info": {
+		"_postman_id": "db06ce2a-d65d-43f1-a61d-73784fbfe22a",
+		"name": "Avisys Services Pvt Ltd Assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25182571"
+	},
+	"item": [
+		{
+			"name": "Task 1 : Retrieve all customer details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customers/getcustomer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers",
+						"getcustomer"
+					]
+				},
+				"description": "Get Request to retrieve all customer details"
+			},
+			"response": []
+		},
+		{
+			"name": "Task 1 : Retrieve customer details using firstname",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customers/getcustomer?firstName=ka",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers",
+						"getcustomer"
+					],
+					"query": [
+						{
+							"key": "firstName",
+							"value": "ka"
+						}
+					]
+				},
+				"description": "Get method to retrieve customer details using firstname.\r\nFirst name or any alphabet in first name is sent through params."
+			},
+			"response": []
+		},
+		{
+			"name": "Task 1 : Retrieve customer details using lastname",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customers/getcustomer?lastName=sm",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers",
+						"getcustomer"
+					],
+					"query": [
+						{
+							"key": "lastName",
+							"value": "sm"
+						}
+					]
+				},
+				"description": "Get method to retrieve customer details using lastname.\r\nFirst name or any alphabet in last name is sent through params."
+			},
+			"response": []
+		},
+		{
+			"name": "Task 1 : Retrieve customer details using mobile number",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customers/getcustomer?mobileNumber=9111111112",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers",
+						"getcustomer"
+					],
+					"query": [
+						{
+							"key": "mobileNumber",
+							"value": "9111111112"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Task 2 : Create new customer using post method",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\":\"Shreyas\",\r\n    \"lastName\":\"Chaudhari\",\r\n    \"mobileNumber\":\"8779494157\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/customers/addnewcustomer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers",
+						"addnewcustomer"
+					]
+				},
+				"description": "Post method to create new customer."
+			},
+			"response": []
+		},
+		{
+			"name": "Task 2 : create new customer with existing mobile number.",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"firstName\": \"Joe\",\r\n        \"lastName\": \"Turing\",\r\n        \"mobileNumber\": \"9111111112\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/customers/addnewcustomer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers",
+						"addnewcustomer"
+					]
+				},
+				"description": "Post method to create new customer using existing mobile number.\r\nthe api endpoint sends a 500 response with a message \"Unable to create Customer. Mobile number already present.\""
+			},
+			"response": []
+		},
+		{
+			"name": "Task 3 : Retrieve customer details with multiple mobile numbers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customers/getcustomer?mobileNumber=8779494157",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers",
+						"getcustomer"
+					],
+					"query": [
+						{
+							"key": "mobileNumber",
+							"value": "8779494157"
+						}
+					]
+				},
+				"description": "The application is modified and now get method is used to retrieve customer details with multiple mobile numbers of same customer."
+			},
+			"response": []
+		},
+		{
+			"name": "Task 4 : Create new customer with multiple mobile numbers",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"firstName\": \"Shreyas\",\r\n        \"lastName\": \"Chaudhari\",\r\n        \"mobileNumbers\": [\r\n            \"8779494157\",\r\n            \"9876565812\",\r\n            \"9865001218\",\r\n            \"9876599853\"\r\n        ]\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/customers/addnewcustomer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers",
+						"addnewcustomer"
+					]
+				},
+				"description": "Post method used for creating customer details with multiple mobile details."
+			},
+			"response": []
+		},
+		{
+			"name": "Task 5 : Delete existing customer by mobile number",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customers/deletecustomer?mobileNumber=9111111111",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers",
+						"deletecustomer"
+					],
+					"query": [
+						{
+							"key": "mobileNumber",
+							"value": "9111111111"
+						}
+					]
+				},
+				"description": "Delete method used to delete the existing customer by finding the customer by mobile number"
+			},
+			"response": []
+		}
+	]
+}
